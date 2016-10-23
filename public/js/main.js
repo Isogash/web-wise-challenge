@@ -1,9 +1,7 @@
 var heading = $(".heading");
 var images = $(".quad-images");
 var content = $(".content");
-var xs = $(".device-xs");
-
-console.log(xs);
+var xs = $(".device-sm");
 
 var headingLimit;
 var animate;
@@ -16,8 +14,6 @@ function onScroll() {
 
   if(animate) {
     var scrollY = $(window).scrollTop();
-
-    console.log(headingLimit);
 
     heading.css({ top: (scrollY < headingLimit ? scrollY : headingLimit) });
     images.css({ top: (scrollY / 2 )});
