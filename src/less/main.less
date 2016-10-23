@@ -15,6 +15,8 @@
 
 .heading {
   .container-fluid;
+  background-color: @body-bg;
+  position: relative;
   img {
     .img-responsive();
     .center-block();
@@ -23,7 +25,7 @@
     .text-center;
     font-size: 8em;
     font-weight: bold;
-    @media (max-width: @screen-xs) {
+    @media (max-width: @screen-sm) {
       font-size: 5em;
     }
   }
@@ -31,13 +33,13 @@
 
 .quad-images {
   .container-fluid;
-  /*position: fixed;
-  z-index: -1;*/
+  position: relative;
+  z-index: -1;
   div {
     .make-row();
     .padding-0;
     img {
-      .make-xs-column(6);
+      .make-sm-column(6);
       .img-responsive();
       .padding-0;
     }
@@ -70,8 +72,13 @@
   }
 }
 
+.solid-bg {
+  background-color: @body-bg;
+}
+
 .video-container {
   .container;
+  background-color: @body-bg;
   font-family: @font-family-sans-serif;
   h1 {
     .text-center;

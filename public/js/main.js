@@ -1,12 +1,25 @@
-/*
+var heading = $(".heading");
 var images = $(".quad-images");
+var content = $(".content");
 
-console.log(images);
+var headingOffsetLimit = 0;
 
-$(window).scroll(function () {
+function onResize() {
+  headingOffsetLimit = content.offset().top - heading.outerHeight(true);
+}
 
-  var y = $(window).scrollTop();
+function onScroll() {
 
-  images.css({y: (y / 2) + 'px'});
-});
-*/
+  var scrollY = $(window).scrollTop();
+
+  console.log(headingOffsetLimit);
+
+  heading.css({ top: (scrollY < headingOffsetLimit ? scrollY : headingOffsetLimit) });
+  images.css({ top: (scrollY / 2 )});
+
+}
+
+$(window).scroll(onScroll);
+$(window).resize(onResize);
+
+onResize();
