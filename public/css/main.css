@@ -7140,6 +7140,8 @@ button.close {
   margin-right: -15px;
 }
 .footer .container .menus .menu {
+  float: left;
+  width: 33.33333333%;
   position: relative;
   min-height: 1px;
   padding-left: 15px;
