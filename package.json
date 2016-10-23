@@ -1,0 +1,24 @@
+{
+  "name": "webwisechallenge",
+  "version": "1.0.0",
+  "description": "Web Wise Challenge",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Isogash/webwisechallenge.git"
+  },
+  "author": "Adam Mitchell",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Isogash/webwisechallenge/issues"
+  },
+  "homepage": "https://github.com/Isogash/webwisechallenge#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.1.0",
+    "gulp-watch": "^4.3.10"
+  }
+}
