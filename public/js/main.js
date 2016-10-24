@@ -1,6 +1,7 @@
 var heading = $(".heading");
 var images = $(".quad-images");
 var content = $(".content");
+var blocker = $(".blocker");
 var xs = $(".device-sm");
 
 var headingLimit, animationStart, animationEnd;
@@ -19,12 +20,14 @@ function onScroll() {
     // quadratic animation smoothing
     var y;
     if(scrollY < animationStart) {
-      y = scrollY;
+      //y = scrollY;
+      y = 0
     } else if (scrollY < animationEnd) {
       var x = scrollY - animationStart;
-      y = scrollY - (1 / (animationDistance * 4) * (x * x));
+      //y = scrollY - (1 / (animationDistance * 4) * (x * x));
+      y = - (1 / (animationDistance * 4) * (x * x));
     } else {
-      y = headingLimit;
+      y = headingLimit - scrollY;
     }
     heading.css({ top: (y) });
 
@@ -34,13 +37,19 @@ function onScroll() {
 }
 
 function onResize() {
-  headingLimit = content.offset().top - heading.outerHeight(true);
+  var height = heading.outerHeight(true);
+  headingLimit = content.offset().top - height;
   animationStart = headingLimit - animationDistance;
   animationEnd = headingLimit + animationDistance;
   var newAnimate = !isXs();
-  if(!newAnimate && animate) { // if XS becomes hidden
-    heading.css({ top: 0 });   // we should reset the elements
-    images.css({ top: 0 });
+  if(!newAnimate && animate) { // if we switch to phone/tablet
+    heading.css({ position: 'relative', top: 0 }); // let the title float
+    images.css({ top: 0 }); // images don't move
+    blocker.css({ height: 0 }); // don't push stuff down with the blocker
+  }
+  if(newAnimate && !animate) { // if we switch to tablet/phone
+    heading.css({ position: 'fixed' }); // heading is now fixed to the top for animation
+    blocker.css({ height: height}); // blocker pushes stuff down because the heading will no longer
   }
   animate = newAnimate;
   onScroll();
