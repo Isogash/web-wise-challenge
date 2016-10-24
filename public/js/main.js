@@ -64,4 +64,4 @@ function onResize() {
 $(window).scroll(onScroll);
 $(window).resize(onResize);
 
-onResize();
+setTimeout(onResize, 10);
