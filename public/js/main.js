@@ -1,4 +1,5 @@
-var heading = $(".heading");
+var heading = $(".heading-outer");
+var realHeading = $(".heading"); //sorry!
 var images = $(".quad-images");
 var content = $(".content");
 var blocker = $(".blocker");
@@ -38,20 +39,25 @@ function onScroll() {
 
 function onResize() {
   var height = heading.outerHeight(true);
-  headingLimit = content.offset().top - height;
-  animationStart = headingLimit - animationDistance;
-  animationEnd = headingLimit + animationDistance;
+  //console.log(height);
+
   var newAnimate = !isXs();
   if(!newAnimate && animate) { // if we switch to phone/tablet
     heading.css({ position: 'relative', top: 0 }); // let the title float
     images.css({ top: 0 }); // images don't move
     blocker.css({ height: 0 }); // don't push stuff down with the blocker
   }
-  if(newAnimate && !animate) { // if we switch to tablet/phone
+  if(newAnimate) {
     heading.css({ position: 'fixed' }); // heading is now fixed to the top for animation
     blocker.css({ height: height}); // blocker pushes stuff down because the heading will no longer
   }
   animate = newAnimate;
+
+  //setup animation variables AFTER
+  headingLimit = content.offset().top - height;
+  animationStart = headingLimit - animationDistance;
+  animationEnd = headingLimit + animationDistance;
+
   onScroll();
 }
 
