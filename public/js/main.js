@@ -8,6 +8,7 @@ var xs = $(".device-sm");
 var headingLimit, animationStart, animationEnd;
 var animate;
 var animationDistance = 100;
+var firstTime = true;
 
 function isXs() {
   return xs.is(':visible');
@@ -16,7 +17,13 @@ function isXs() {
 function onScroll() {
 
   if(animate) {
+    headingLimit = images.height();
+    animationStart = headingLimit - animationDistance;
+    animationEnd = headingLimit + animationDistance;
+
     var scrollY = $(window).scrollTop();
+
+    console.log(animationStart);
 
     // quadratic animation smoothing
     var y;
@@ -41,28 +48,20 @@ function onResize() {
   var height = heading.outerHeight(true);
   //console.log(height);
 
-  var newAnimate = !isXs();
-  if(!newAnimate && animate) { // if we switch to phone/tablet
+  animate = !isXs();
+  if(!animate && !firstTime) { // if we switch to phone/tablet
     heading.css({ position: 'relative', top: 0 }); // let the title float
     images.css({ top: 0 }); // images don't move
     blocker.css({ height: 0 }); // don't push stuff down with the blocker
-  }
-  if(newAnimate) {
+  } else {
     heading.css({ position: 'fixed' }); // heading is now fixed to the top for animation
     blocker.css({ height: height}); // blocker pushes stuff down because the heading will no longer
   }
-  animate = newAnimate;
 
-  //setup animation variables AFTER
-  headingLimit = content.offset().top - height;
-  animationStart = headingLimit - animationDistance;
-  animationEnd = headingLimit + animationDistance;
-
-  onScroll();
+  //onScroll();
 }
 
-$(window).scroll(onScroll);
-$(window).resize(onResize);
-
 onResize();
-setTimeout(onResize, 10);
+
+$(window).scroll(onScroll);
+$(window).resize(function() { onResize(); onScroll(); });
